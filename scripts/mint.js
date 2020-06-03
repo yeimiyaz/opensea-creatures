@@ -1,3 +1,4 @@
+require('dotenv').config("./env")
 const ethers = require('ethers')
 const NFT_CONTRACT_ADDRESS = process.env.NFT_CONTRACT_ADDRESS
 const OWNER_ADDRESS = process.env.OWNER_ADDRESS
