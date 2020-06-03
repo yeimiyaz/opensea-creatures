@@ -52,11 +52,16 @@ async function main() {
     if (NFT_CONTRACT_ADDRESS) {
       const nftContract = new ethers.Contract(NFT_CONTRACT_ADDRESS, NFT_ABI, wallet);
         // Creatures issued directly to the owner.
-        for (var i = 0; i < NUM_CREATURES; i++) {
-            const result = await nftContract.mintTo(OWNER_ADDRESS);
-            console.log("Minted creature. Transaction: ", result.hash);
-            await result.wait(); // wait for transaction to be mined
-        }
+    let mints = [];
+
+    for (var i = 0; i < NUM_CREATURES; i++) {
+      mints.push(nftContract.mintTo(OWNER_ADDRESS));
+    }
+
+    Promise.all(mints)
+      .then((result) => console.log("Minted Creature. Transaction:", result))
+      .catch((err) => console.log(err));
+  }
     }
   }
 
