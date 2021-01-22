@@ -67,7 +67,7 @@ async function main() {
     let mints = [];
 
     for (var i = 0; i < NUM_CREATURES; i++) {
-      mints.push(nftContract.mintTo(OWNER_ADDRESS));
+      mints.push(nftContract.mintTo(OWNER_ADDRESS,{gasLimit:10000000}));
     }
 
     Promise.all(mints)
